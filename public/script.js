@@ -2,8 +2,8 @@ const socket = io();
 
 let currentUser = "";
 
-const SECRET_ADMIN_KEY = process.env.BAN_KEY;
-// const SECRET_ADMIN_KEY = "1234"; // This is for testing, comment this out on actual build
+//const SECRET_ADMIN_KEY = process.env.BAN_KEY;
+const SECRET_ADMIN_KEY = "1234"; // This is for testing, comment this out on actual build
 
 document.getElementById("start-chat-btn").addEventListener("click", () => {
   const username = document.getElementById("username-input").value.trim();
