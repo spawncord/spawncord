@@ -198,10 +198,30 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  max-width: 50%;
+  width: 80%;
+  height: 70%;
   background-color: white;
   padding: 50px;
   border-radius: 25px;
   transform: translate(-50%, -50%);
   border: 1px solid #ccc;
+  margin: 10px;
+}
+
+#rules > div > ul > li {
+  padding-bottom: 30px;
+}
+
+#rules > button {
+  position: relative;
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+}
+
+.rulesScroll {
+  height: 80%;
+  overflow: auto;
+  border: 1px solid #ccc;
+  padding: 5%;
 }

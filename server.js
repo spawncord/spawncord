@@ -13,8 +13,8 @@ app.use(express.static('public'));
 const bannedIPs = new Set();
 
 const ADMINS = new Set(['Abaka']); // Fine for now, as this is just a test build. Although some security expert, we NEED to change this later on
-// const SECRET_ADMIN_KEY = process.env.BAN_KEY;
-const SECRET_ADMIN_KEY = "1234"; // This is for testing, comment this out on actual build
+const SECRET_ADMIN_KEY = process.env.BAN_KEY;
+// const SECRET_ADMIN_KEY = "1234"; // This is for testing, comment this out on actual build
 
 let online_users = 0
 let online_user_list = []
@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     socket.username = username;
     socket.ip = cleanIp;
 
-    online_users++;
+    online_users = online_user_list.length + 1;
     online_user_list.push({ username, ip: cleanIp });
 
     io.emit('online-count', online_users);
