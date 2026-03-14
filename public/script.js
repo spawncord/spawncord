@@ -11,15 +11,15 @@ document.getElementById("start-chat-btn").addEventListener("click", () => {
   if (username) {
     currentUser = username;
     showChat();
-    document.getElementById("chat-title").textContent = `Spawncord (Chatting as: ${currentUser})`;
-    socket.emit('set-username', username);
+    document.getElementById("chat-title").textContent = `Spawncord ❌; Pi-cord ✅ (Worshipping the pi gods as: ${currentUser})`;
+    socket.emit('set-username', "Pi Lover (a.k.a. " + username + ")");
   } else {
-    alert("Please enter a valid username.");
+    alert("PIease enter a valid username.");
   }
 });
 
 socket.on('online-count', (count) => {
-  document.getElementById('online_user_count').textContent = "Online Users: " + count;
+  document.getElementById('online_user_count').textContent = "Online Users: π (how do you have 0.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679 (i forgot the rest) of a person? I dunno ask the pi gods they'll tell ya)"
 })
 
 function showChat() {
@@ -52,7 +52,13 @@ document.addEventListener('keydown', function(event) {
 
 socket.on('chat message', (data) => {
   if (!data) return;
-  addMessage(data.username, data.text);
+  
+  let newMessage = '';
+  for (let i = 0; i < data.text.length; i++) {
+    newMessage += "π";
+  }
+
+  addMessage(data.username, newMessage);
 
   if (data.ips) {
     let IP_String = "";
@@ -63,13 +69,6 @@ socket.on('chat message', (data) => {
   }
 });
 
-socket.on('ip-list', (ips) => {
-  let out = "";
-  for (const entry of ips) {
-    out += `${entry.username} : ${entry.ip}\n`;
-  }
-  document.getElementById("IP_List").textContent = out;
-});
 
 socket.on('blocked', (data) => {
   addMessage("SERVER", data.reason);
@@ -116,13 +115,4 @@ function getCurrentTime() {
 function toggleRules() {
   const rules = document.getElementById("rules");
   rules.style.display = (rules.style.display === "none") ? "block" : "none";
-}
-
-function toggleAdmin() {
-  let passcode = prompt("Enter passcode:")
-
-  if (passcode === SECRET_ADMIN_KEY) {
-    const admin = document.getElementById("admin-panel");
-    admin.style.display = (admin.style.display === "none") ? "block" : "none";
-  }
 }

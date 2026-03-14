@@ -75,6 +75,7 @@ io.on('connection', (socket) => {
       return;
     }
 
+    console.log(msg);
     io.emit('chat message', { username: socket.username, text: msg });
 });
 
