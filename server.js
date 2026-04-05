@@ -30,6 +30,38 @@ io.on('connection', (socket) => {
     online_users = online_user_list.length + 1;
     online_user_list.push({ username, ip: cleanIp });
 
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const repl = require('repl');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+app.use(express.static('public'));
+
+// haha this is great security :3
+const bannedIPs = new Set();
+
+const ADMINS = new Set(['Abaka']); // Fine for now, as this is just a test build. Although some security expert, we NEED to change this later on
+const SECRET_ADMIN_KEY = process.env.BAN_KEY;
+// const SECRET_ADMIN_KEY = "1234"; // This is for testing, comment this out on actual build
+
+let online_users = 0
+let online_user_list = []
+
+io.on('connection', (socket) => {
+  const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
+
+  socket.on('set-username', (username) => {
+    const cleanIp = ip.startsWith('::ffff:') ? ip.replace('::ffff:', '') : ip;
+    socket.username = username;
+    socket.ip = cleanIp;
+
+    online_users = online_user_list.length + 1;
+    online_user_list.push({ username, ip: cleanIp });
+
     io.emit('online-count', online_users);
     io.emit('ip-list', online_user_list);
   });
@@ -75,7 +107,6 @@ io.on('connection', (socket) => {
       return;
     }
 
-    console.log(msg);
     io.emit('chat message', { username: socket.username, text: msg });
 });
 
