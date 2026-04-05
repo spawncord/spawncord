@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spawncord..?</title>
+  <title>Chatroom</title>
   <link rel="stylesheet" href="style.css" />
   
-  <!-- This is kinda important so dont remove :3 -->
+  <!-- This is kinda important so dont remove -->
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
@@ -17,10 +17,15 @@
 
   <div id="chat-title" style="display:none;">Chat</div>
   <div id="chat-note" style="text-align:center; font-size:12px; color:#888; margin-bottom:5px;">
-    This is a <bold>PI</bold>neapple safe space to get away from controversy. Don't be stupid, be a good human being :3
-    <p id="online_user_count">Online users: &pi;</p>
+    This is a spawnism safe space to get away from harrasment. Don't be stupid, be a good human being :3
+    <p id="online_user_count">Online users: 0</p>
   </div>
 
+  <button onclick="toggleAdmin()">Admin Panel</button>
+  <div id="admin-panel" style="display: none;">
+    <h1>c00lgui</h1>
+    <p id="IP_List">IPs will appear here</p>
+  </div>
   
   <div id="chat-container" style="display:none;">
       <div id="chat-box">
@@ -28,21 +33,27 @@
       </div>
       <div id="input-area">
           <input type="text" id="message-input" placeholder="Type a message..." />
-          <button id="send-btn">π</button>
+          <button id="send-btn"></button>
       </div>
   </div>
 
-    <button onclick="toggleRules()">Happy Pi Day!</button>
+    <button onclick="toggleRules()">Show Rules</button>
     <div id="rules" style="display:none;">
-        <h1>If any of these are broken, well, these aren't rules anymore so idc</h1>
+        <h1>If any of these are broken, you are banned on the spot!</h1>
         <div class="rulesScroll">
           <ul>
-            <li>Welcome to Picord!</li>
-            <li>This is a prank version of spawncord specifially for pi day! (March 14th)</li>
-            <li>Don't be alarmed if your messages suddenly turn to the pi symbol! This is intentional</li>
-            <li>If you want to talk normally, this update will be reverted at 12:00 AM CST</li>
+              <li>Be kind</li>
+              <li>No anti-spawnism</li>
+              <li>No pro-spawn cult</li>
+              <li>No asking for people's information</li>
+              <li>No revealing peoples information</li>
+              <li>No targeted attacks</li>
+              <li>No attacking in general</li>
+              <li>No intentional impersonation (accidents are fine)</li>
+              <li>No pedophical behaviors</li>
+              <li>No promoting self-harm/suicide</li>
+              <li>No being an attrocious human being (or therian)</li>
           </ul>
-          
         </div>
         <button onclick="toggleRules()">Close</button>
     </div>
